@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 # Health-Metrics
-=======
+
 Project Description: Health Metrics and Medical Data Management
 
 This project aims to provide a comprehensive solution for managing health metrics and medical data using FastAPI, SQLite, and SQLAlchemy. The system consists of two main components: Health Metrics and Medical Data.
@@ -64,4 +63,3 @@ How to Run:
 
 
 This project provides a foundation for a versatile health data management system, allowing users to monitor and maintain their health metrics and comprehensive medical records. Future enhancements may include additional features, improved visualizations, and integration with external systems.
->>>>>>> 1ecf4728 (Transferring to git)
