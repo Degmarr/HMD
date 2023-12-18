@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Health Metrics Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Health Metrics Dashboard</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="weight">Weight (kg):</label>
+                <input type="number" step="0.1" class="form-control" id="weight" name="weight" required>
+            </div>
+            <div class="form-group">
+                <label for="bloodPressure">Blood Pressure:</label>
+                <input type="text" class="form-control" id="bloodPressure" name="blood_pressure" required>
+            </div>
+            <div class="form-group">
+                <label for="heartRate">Heart Rate (bpm):</label>
+                <input type="number" class="form-control" id="heartRate" name="heart_rate" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Metric</button>
+        </form>
+        {% if request.query_params.deleted %}
+        <div class="alert alert-success" role="alert">
+            Record deleted successfully!
+        </div>
+        {% endif %}
+        <h2 class="mt-4">Health Trends Over Time</h2>
+        <table class="table mt-2">
+            <thead>
+                <tr>
+                    <th>Weight (kg)</th>
+                    <th>Blood Pressure</th>
+                    <th>Heart Rate (bpm)</th>
+                    <th>Action</th> <!-- New column for the delete button -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(health_data['weight']|length) %}
+                <tr>
+                    <td>{{ health_data['weight'][i] }}</td>
+                    <td>{{ health_data['blood_pressure'][i] }}</td>
+                    <td>{{ health_data['heart_rate'][i] }}</td>
+                    <td>
+                        <form method="post" action="/delete">
+                            <input type="hidden" name="row_id" value="{{ health_data['id'][i] }}">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <h2 class="mt-4">Visual Trends Over Time</h2>
+        {% for figure in figures %}
+        {{ figure | safe }}
+        {% endfor %}
+    </div>
+</body>
+
+</html>
